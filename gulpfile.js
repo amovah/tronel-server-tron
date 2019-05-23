@@ -9,8 +9,11 @@ const replace = require('gulp-replace');
 
 gulp.task('del', (cb) => {
   del([
-    'build/**'
-  ], cb())
+    'build/**',
+    '!build'
+  ]);
+
+  cb();
 });
 
 gulp.task('babel', (cb) => {
