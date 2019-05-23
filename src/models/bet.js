@@ -1,6 +1,11 @@
 import mongoose, { Schema } from 'mongoose';
 
 const schema = new Schema({
+  address: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   creator: {
     type: String,
     required: true,
@@ -36,10 +41,6 @@ const schema = new Schema({
   done: {
     type: Boolean,
     default: false,
-  },
-  address: {
-    type: String,
-    default: '0x0000000000000000',
   },
 });
 
