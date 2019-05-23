@@ -5,6 +5,7 @@ const babel = require('gulp-babel');
 const lint = require('gulp-eslint');
 const del = require('del');
 const { resolve } = require('path');
+const replace = require('gulp-replace');
 
 gulp.task('del', (cb) => {
   del([
