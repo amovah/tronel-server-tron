@@ -1,7 +1,9 @@
+import 'babel-polyfill';
 import express from 'express';
 import { env } from 'process';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import Record from './models/Record';
 
 mongoose.connect('mongodb://localhost/tronel', { useNewUrlParser: true });
 mongoose.connection.on('error', (error) => {
@@ -16,11 +18,21 @@ mongoose.connection.on('disconnected', () => {
   process.exit(0);
 });
 
+(async () => {
+  const record = await Record.findOne();
+  if (!record) {
+    const newRecord = new Record({
+      lastIndex: 0,
+    });
 
-const app = express();
+    await newRecord.save();
+  }
 
-app.use(bodyParser.json());
+  const app = express();
 
-app.listen(env.NODE_PORT || 8010, () => {
-  console.log(`server starts at ${env.NODE_PORT || 8010}`);
-});
+  app.use(bodyParser.json());
+
+  app.listen(env.NODE_PORT || 8010, () => {
+    console.log(`server starts at ${env.NODE_PORT || 8010}`);
+  });
+})();
