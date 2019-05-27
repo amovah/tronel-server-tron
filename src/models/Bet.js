@@ -42,6 +42,14 @@ const schema = new Schema({
     type: Boolean,
     default: false,
   },
+  joinerJoiend: {
+    type: Boolean,
+    default: false,
+  },
+  creatorJoined: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export default mongoose.model('ret', schema);

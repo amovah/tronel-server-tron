@@ -7,6 +7,7 @@ const router = new Router();
 router.post('/bets', async (req, res) => {
   // fetching data
   // check for new bet
+  // validate creator is joined or not
   // add new bet
   // start job
   // change record state
