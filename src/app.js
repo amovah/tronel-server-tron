@@ -4,8 +4,12 @@ import { env } from 'process';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import Record from './models/Record';
+import routes from './routes';
 
-mongoose.connect('mongodb://localhost/tronel', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/tronel', {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+});
 mongoose.connection.on('error', (error) => {
   console.error(`Database connection error ${error}`);
 
@@ -29,6 +33,8 @@ mongoose.connection.on('disconnected', () => {
   const app = express();
 
   app.use(bodyParser.json());
+
+  app.use(routes);
 
   app.listen(env.NODE_PORT || 8010, () => {
     console.log(`server starts at ${env.NODE_PORT || 8010}`);

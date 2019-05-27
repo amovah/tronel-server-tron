@@ -44,4 +44,4 @@ const schema = new Schema({
   },
 });
 
-export default mongoose.model('Bet', schema);
+export default mongoose.model('ret', schema);

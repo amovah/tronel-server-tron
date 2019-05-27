@@ -11,7 +11,9 @@ gulp.task('del', (cb) => {
   del([
     'build/**',
     '!build'
-  ], cb);
+  ]);
+
+  cb();
 });
 
 gulp.task('babel', (cb) => {
@@ -22,7 +24,7 @@ gulp.task('babel', (cb) => {
     ],
     plugins: [],
   }))
-  .pipe(replace('Root', resolve(__dirname, 'src')))
+  .pipe(replace('Root', resolve(__dirname, 'build')))
   .pipe(gulp.dest('build/'));
 
   cb();
