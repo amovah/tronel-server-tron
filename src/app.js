@@ -4,7 +4,7 @@ import { env } from 'process';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import Record from './models/Record';
-import routes from './routes';
+import routes from './routers';
 
 mongoose.connect('mongodb://localhost/tronel', {
   useNewUrlParser: true,
