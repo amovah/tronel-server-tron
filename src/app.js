@@ -4,7 +4,10 @@ import { env } from 'process';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import Record from './models/Record';
+import Bet from './models/Bet';
 import routes from './routers';
+import { start } from './job';
+import setPrice from './setPrice';
 
 mongoose.connect('mongodb://localhost/tronel', {
   useNewUrlParser: true,
@@ -28,6 +31,17 @@ mongoose.connection.on('disconnected', () => {
     const newRecord = new Record();
 
     await newRecord.save();
+  }
+
+  const bets = await Bet.find({
+    done: false,
+    disabled: false,
+    predictTime: { $gt: Date.now() },
+  });
+  for (const bet of bets) {
+    start(bet.id.toString(), () => {
+      setPrice(bet.currency, bet.address);
+    }, bet.predictTime * 1000 - Date.now());
   }
 
   const app = express();
