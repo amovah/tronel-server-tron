@@ -7,7 +7,8 @@ import Record from './models/Record';
 import Bet from './models/Bet';
 import routes from './routers';
 import { start } from './job';
-import setPrice from './setPrice';
+import setPrice from './contract/setPrice';
+import retrieveMoney from './contract/retrieveMoney';
 
 mongoose.connect('mongodb://localhost/tronel', {
   useNewUrlParser: true,
@@ -42,6 +43,10 @@ mongoose.connection.on('disconnected', () => {
     start(bet.id.toString(), () => {
       setPrice(bet.currency, bet.address);
     }, bet.predictTime * 1000 - Date.now());
+
+    start(`${bet.id.toString()}-retrieve`, () => {
+      retrieveMoney(bet.address);
+    }, bet.predictTime * 1000 - Date.now() + 60 * 1000);
   }
 
   const app = express();
