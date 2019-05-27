@@ -15,7 +15,7 @@ router.put('/bets/:id/join', async (req, res) => {
     res.status(400);
     res.json({
       status: 'error',
-      error: e.toString(),
+      error: e,
     });
   }
 });
