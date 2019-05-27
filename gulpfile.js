@@ -11,9 +11,7 @@ gulp.task('del', (cb) => {
   del([
     'build/**',
     '!build'
-  ]);
-
-  cb();
+  ], cb);
 });
 
 gulp.task('babel', (cb) => {

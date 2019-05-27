@@ -21,9 +21,7 @@ mongoose.connection.on('disconnected', () => {
 (async () => {
   const record = await Record.findOne();
   if (!record) {
-    const newRecord = new Record({
-      lastIndex: 0,
-    });
+    const newRecord = new Record();
 
     await newRecord.save();
   }
