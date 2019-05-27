@@ -1,0 +1,23 @@
+import { Router } from 'express';
+import Bet from 'Root/models/Bet';
+
+const router = new Router();
+
+router.put('/bets/:id/join', async (req, res) => {
+  try {
+    const bet = await Bet.findById(req.params.id);
+    if (!bet) {
+      throw new Error('Bet not found!');
+    }
+    // fetch joiner address from bet contract
+    res.json(bet);
+  } catch (e) {
+    res.status(400);
+    res.json({
+      status: 'error',
+      error: e.toString(),
+    });
+  }
+});
+
+export default router;

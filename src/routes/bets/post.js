@@ -8,9 +8,10 @@ router.post('/bets', async (req, res) => {
   // fetching data
   // check for new bet
   // add new bet
+  // start job
   // change record state
   res.json({
-    status: 'OK',
+    status: 'ok',
   });
 });
 
