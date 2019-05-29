@@ -34,15 +34,7 @@ export default async () => {
           })(),
 
           (async () => {
-            gathered.creatorJoined = await bet.creatorJoined();
-          })(),
-
-          (async () => {
             gathered.joiner = await bet.joiner();
-          })(),
-
-          (async () => {
-            gathered.joinerJoined = await bet.joinerJoined();
           })(),
 
           (async () => {
@@ -59,10 +51,6 @@ export default async () => {
 
           (async () => {
             gathered.predictType = await bet.predictType();
-          })(),
-
-          (async () => {
-            gathered.submittedPrice = await bet.submittedPrice();
           })(),
 
           (async () => {

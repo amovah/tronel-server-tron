@@ -42,14 +42,6 @@ const schema = new Schema({
     type: Boolean,
     required: true,
   },
-  joinerJoiend: {
-    type: Boolean,
-    required: true,
-  },
-  creatorJoined: {
-    type: Boolean,
-    required: true,
-  },
   balance: {
     type: Number,
     required: true,
