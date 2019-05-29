@@ -8,7 +8,7 @@ const { resolve } = require('path');
 const replace = require('gulp-replace');
 
 gulp.task('del', (cb) => {
-  del([
+  del.sync([
     'build/**',
     '!build'
   ]);
@@ -25,6 +25,9 @@ gulp.task('babel', (cb) => {
     plugins: [],
   }))
   .pipe(replace('Root', resolve(__dirname, 'build')))
+  .pipe(gulp.dest('build/'));
+
+  gulp.src('src/**/*.json')
   .pipe(gulp.dest('build/'));
 
   cb();

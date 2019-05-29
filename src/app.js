@@ -7,8 +7,8 @@ import Record from './models/Record';
 import Bet from './models/Bet';
 import routes from './routers';
 import { start } from './job';
-import setPrice from './contract/setPrice';
-import retrieveMoney from './contract/retrieveMoney';
+import setPrice from './helpers/setPrice';
+import retrieveMoney from './helpers/retrieveMoney';
 
 mongoose.connect('mongodb://localhost/tronel', {
   useNewUrlParser: true,

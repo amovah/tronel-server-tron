@@ -3,7 +3,7 @@ import mongoose, { Schema } from 'mongoose';
 const schema = new Schema({
   lastIndex: {
     type: Number,
-    default: -1,
+    default: 0,
   },
 });
 
