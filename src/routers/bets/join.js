@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import Bet from 'Root/models/Bet';
+import bC from 'Root/contract/bet';
 import { stop } from 'Root/job';
 
 const router = new Router();
@@ -10,10 +11,16 @@ router.put('/bets/:id/join', async (req, res) => {
     if (!bet) {
       throw new Error('Bet not found!');
     }
-    // fetch joiner address from bet contract
-    // then check is joinerJoiend or not
-    // it joined then do below line
-    // stop(`${bet.id.toString()}-retrieve`);
+
+    const betContract = bC(bet.address);
+
+    const joiner = await betContract.joiner();
+    if (joiner !== '0x0000000000000000000000000000000000000000') {
+      bet.joiner = joiner;
+      bet.save();
+
+      stop(`${bet.id.toString()}-retrieve`);
+    }
 
     res.json(bet);
   } catch (e) {
