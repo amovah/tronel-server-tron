@@ -32,23 +32,27 @@ const schema = new Schema({
   },
   submittedPrice: {
     type: Number,
-    default: 0,
+    required: true,
   },
   disabled: {
     type: Boolean,
-    default: false,
+    required: true,
   },
   done: {
     type: Boolean,
-    default: false,
+    required: true,
   },
   joinerJoiend: {
     type: Boolean,
-    default: false,
+    required: true,
   },
   creatorJoined: {
     type: Boolean,
-    default: false,
+    required: true,
+  },
+  balance: {
+    type: Number,
+    required: true,
   },
 });
 
