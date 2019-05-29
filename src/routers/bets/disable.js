@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import Bet from 'Root/models/Bet';
+import betContract from 'Root/contract/bet';
 
 const router = new Router();
 
@@ -9,7 +10,10 @@ router.put('/bets/:id/disable', async (req, res) => {
     if (!bet) {
       throw new Error('Bet not found!');
     }
-    // fetch disable status from bet contract
+
+    bet.disabled = await betContract(bet.address).disabled();
+    await bet.save();
+
     res.json(bet);
   } catch (e) {
     res.status(400);
