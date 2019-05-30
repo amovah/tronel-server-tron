@@ -11,7 +11,7 @@ router.put('/bets/:id/joinAsCreator', async (req, res) => {
       throw new Error('Bet not found!');
     }
 
-    bet.balance = await betContract(bet.address).getBalance();
+    bet.balance = betContract(bet.address).getBalance();
     await bet.save();
 
     res.json(bet);

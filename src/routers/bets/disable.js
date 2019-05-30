@@ -11,7 +11,7 @@ router.put('/bets/:id/disable', async (req, res) => {
       throw new Error('Bet not found!');
     }
 
-    bet.disabled = await betContract(bet.address).disabled();
+    bet.disabled = betContract(bet.address).disabled();
     await bet.save();
 
     res.json(bet);

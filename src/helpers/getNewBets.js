@@ -7,7 +7,7 @@ import retrieveMoney from 'Root/helpers/retrieveMoney';
 import { start } from 'Root/job';
 
 export default async () => {
-  const bets = await factory.getBets();
+  const bets = factory.getBets();
   const record = await Record.findOne();
 
   const newBets = [];
@@ -18,63 +18,68 @@ export default async () => {
     await record.save();
   }
 
-  const actions = [];
   const data = [];
   for (const betAddress of newBets) {
-    actions.push(
-      (async () => {
-        const bet = betContract(betAddress);
-        const gathered = {
-          address: betAddress,
-        };
+    const bet = betContract(betAddress);
+    const gathered = {
+      address: betAddress,
+    };
+    gathered.creator = bet.creator();
+    gathered.joiner = bet.joiner();
+    gathered.currency = bet.currency();
+    gathered.predictPrice = bet.predictPrice();
+    gathered.predictTime = bet.predictTime();
+    gathered.predictType = bet.predictType();
+    gathered.submittedPrice = bet.submittedPrice();
+    gathered.done = bet.done();
+    gathered.disabled = bet.disabled();
+    gathered.balance = bet.getBalance();
 
-        await Promise.all(
-          (async () => {
-            gathered.creator = await bet.creator();
-          })(),
-
-          (async () => {
-            gathered.joiner = await bet.joiner();
-          })(),
-
-          (async () => {
-            gathered.currency = await bet.currency();
-          })(),
-
-          (async () => {
-            gathered.predictPrice = await bet.predictPrice();
-          })(),
-
-          (async () => {
-            gathered.predictTime = await bet.predictTime();
-          })(),
-
-          (async () => {
-            gathered.predictType = await bet.predictType();
-          })(),
-
-          (async () => {
-            gathered.submittedPrice = await bet.submittedPrice();
-          })(),
-
-          (async () => {
-            gathered.done = await bet.done();
-          })(),
-
-          (async () => {
-            gathered.disabled = await bet.disabled();
-          })(),
-
-          (async () => {
-            gathered.balance = await bet.getBalance();
-          })(),
-        );
-
-        data.push(gathered);
-      })(),
-    );
+    // actions.push(
+    //   (async () => {
+    //     const bet = betContract(betAddress);
+    //     const gathered = {
+    //       address: betAddress,
+    //     };
+    //
+    //     await Promise.all(
+    //       (async () => {
+    //         gathered.creator = await bet.creator();
+    //       })(),
+    //
+    //       (async () => {
+    //         gathered.joiner = await bet.joiner();
+    //       })(),
+    //
+    //       (async () => {
+    //       })(),
+    //
+    //       (async () => {
+    //       })(),
+    //
+    //       (async () => {
+    //       })(),
+    //
+    //       (async () => {
+    //       })(),
+    //
+    //       (async () => {
+    //       })(),
+    //
+    //       (async () => {
+    //       })(),
+    //
+    //       (async () => {
+    //       })(),
+    //
+    //       (async () => {
+    //       })(),
+    //     );
+    //
+    //     data.push(gathered);
+    //   })(),
+    // );
   }
-  await Promise.all(actions);
 
   const showUser = [];
   await Promise.all(data.map(async (newBet) => {

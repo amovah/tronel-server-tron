@@ -14,7 +14,7 @@ router.put('/bets/:id/join', async (req, res) => {
 
     const betContract = bC(bet.address);
 
-    const joiner = await betContract.joiner();
+    const joiner = betContract.joiner();
     if (joiner !== '0x0000000000000000000000000000000000000000') {
       bet.joiner = joiner;
       bet.save();
