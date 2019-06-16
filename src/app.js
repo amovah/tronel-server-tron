@@ -4,11 +4,11 @@ import { env } from 'process';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import Record from './models/Record';
-import Bet from './models/Bet';
+// import Bet from './models/Bet';
 import routes from './routers';
-import { start } from './job';
-import setPrice from './helpers/setPrice';
-import retrieveMoney from './helpers/retrieveMoney';
+// import { start } from './job';
+// import setPrice from './helpers/setPrice';
+// import retrieveMoney from './helpers/retrieveMoney';
 import getNewBets from './helpers/getNewBets';
 
 mongoose.connect('mongodb://localhost/tronel', {
@@ -35,20 +35,20 @@ mongoose.connection.on('disconnected', () => {
     await newRecord.save();
   }
 
-  const bets = await Bet.find({
-    done: false,
-    disabled: false,
-    predictTime: { $gt: Date.now() },
-  });
-  for (const bet of bets) {
-    start(bet.id.toString(), () => {
-      setPrice(bet.currency, bet.address);
-    }, bet.predictTime * 1000 - Date.now());
-
-    start(`${bet.id.toString()}-retrieve`, () => {
-      retrieveMoney(bet.address);
-    }, bet.predictTime * 1000 - Date.now() + 60 * 1000);
-  }
+  // const bets = await Bet.find({
+  //   done: false,
+  //   disabled: false,
+  //   predictTime: { $gt: Date.now() },
+  // });
+  // for (const bet of bets) {
+  //   start(bet.id.toString(), () => {
+  //     setPrice(bet.currency, bet.address);
+  //   }, bet.predictTime * 1000 - Date.now());
+  //
+  //   start(`${bet.id.toString()}-retrieve`, () => {
+  //     retrieveMoney(bet.address);
+  //   }, bet.predictTime * 1000 - Date.now() + 60 * 1000);
+  // }
 
   await getNewBets();
 

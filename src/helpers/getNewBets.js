@@ -2,9 +2,9 @@ import Bet from 'Root/models/Bet';
 import Record from 'Root/models/Record';
 import factory from 'Root/contract/factory';
 import betContract from 'Root/contract/bet';
-import setPrice from 'Root/helpers/setPrice';
-import retrieveMoney from 'Root/helpers/retrieveMoney';
-import { start } from 'Root/job';
+// import setPrice from 'Root/helpers/setPrice';
+// import retrieveMoney from 'Root/helpers/retrieveMoney';
+// import { start } from 'Root/job';
 
 export default async () => {
   const bets = factory.getBets();
@@ -34,51 +34,6 @@ export default async () => {
     gathered.done = bet.done();
     gathered.disabled = bet.disabled();
     gathered.balance = bet.getBalance();
-
-    // actions.push(
-    //   (async () => {
-    //     const bet = betContract(betAddress);
-    //     const gathered = {
-    //       address: betAddress,
-    //     };
-    //
-    //     await Promise.all(
-    //       (async () => {
-    //         gathered.creator = await bet.creator();
-    //       })(),
-    //
-    //       (async () => {
-    //         gathered.joiner = await bet.joiner();
-    //       })(),
-    //
-    //       (async () => {
-    //       })(),
-    //
-    //       (async () => {
-    //       })(),
-    //
-    //       (async () => {
-    //       })(),
-    //
-    //       (async () => {
-    //       })(),
-    //
-    //       (async () => {
-    //       })(),
-    //
-    //       (async () => {
-    //       })(),
-    //
-    //       (async () => {
-    //       })(),
-    //
-    //       (async () => {
-    //       })(),
-    //     );
-    //
-    //     data.push(gathered);
-    //   })(),
-    // );
   }
 
   const showUser = [];
@@ -86,17 +41,17 @@ export default async () => {
     const bet = new Bet(newBet);
     showUser.push(newBet);
 
-    start(
-      bet.id,
-      () => { setPrice(bet.currency, bet.address); },
-      bet.predictTime * 1000 - Date.now(),
-    );
-
-    start(
-      `${bet.id}-retrieveMoney`,
-      () => { retrieveMoney(bet.address); },
-      bet.predictTime * 1000 - Date.now() + 60 * 1000,
-    );
+    // start(
+    //   bet.id,
+    //   () => { setPrice(bet.currency, bet.address); },
+    //   bet.predictTime * 1000 - Date.now(),
+    // );
+    //
+    // start(
+    //   `${bet.id}-retrieveMoney`,
+    //   () => { retrieveMoney(bet.address); },
+    //   bet.predictTime * 1000 - Date.now() + 60 * 1000,
+    // );
 
     await bet.save();
   }));

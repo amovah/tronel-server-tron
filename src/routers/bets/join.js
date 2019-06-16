@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import Bet from 'Root/models/Bet';
 import bC from 'Root/contract/bet';
-import { stop } from 'Root/job';
+// import { stop } from 'Root/job';
 
 const router = new Router();
 
@@ -19,7 +19,7 @@ router.put('/bets/:id/join', async (req, res) => {
       bet.joiner = joiner;
       bet.save();
 
-      stop(`${bet.id.toString()}-retrieve`);
+      // stop(`${bet.id.toString()}-retrieve`);
     }
 
     res.json(bet);
