@@ -2,7 +2,8 @@
   "main": "build/app.js",
   "scripts": {
     "dev": "NODE_ENV=development gulp dev",
-    "start": "NODE_ENV=development supervisor -w build/ build/app.js",
+    "dev-start": "source env/.dev && NODE_ENV=development supervisor -w build/ build/app.js",
+    "start": "source env/.prod && node build/app.js",
     "prod": "NODE_ENV=production gulp prod",
     "copy-env": "sh copy-env.sh"
   },
