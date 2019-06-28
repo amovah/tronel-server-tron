@@ -1,9 +1,18 @@
-import tronweb from 'Root/tronweb';
+import loadFactory from 'Root/contracts/factory';
 
 async function app() {
-  const factory = await tronweb.contract().at(process.env.FACTORY_ADDRESS);
+  const factory = await loadFactory();
 
-  console.log(factory);
+  const res = await factory.createBet(
+    'bitcoin',
+    100,
+    Math.floor(Date.now() / 1000 - 100),
+    1,
+  ).send({
+    shouldPollResponse: true,
+  });
+
+  console.log(res);
 }
 
 app();
