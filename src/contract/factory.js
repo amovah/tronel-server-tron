@@ -1,4 +1,3 @@
-import web3 from 'Root/web3';
-import abi from 'Root/abi/Factory.json';
+import tronweb from 'Root/tronweb';
 
-export default web3.pi.contract(abi).at('0x3ff0251e8d86856318f3a1a083d4b0f84b953171');
+export default () => tronweb.contract().at(process.env.SMART_CONTRACT_ADDRESS);

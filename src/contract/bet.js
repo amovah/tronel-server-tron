@@ -1,4 +1,3 @@
-import web3 from 'Root/web3';
-import abi from 'Root/abi/Bet.json';
+import tronweb from 'Root/tronweb';
 
-export default address => web3.pi.contract(abi).at(address);
+export default address => tronweb.contract().at(address);
