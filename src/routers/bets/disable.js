@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import Bet from 'Root/models/Bet';
-import betContract from 'Root/contract/bet';
+import betContract from 'Root/contracts/bet';
 
 const router = new Router();
 

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import Bet from 'Root/models/Bet';
-import bC from 'Root/contract/bet';
+import bC from 'Root/contracts/bet';
 // import { stop } from 'Root/job';
 
 const router = new Router();

@@ -1,5 +1,5 @@
 import unirest from 'unirest';
-import betContract from 'Root/contract/bet';
+import betContract from 'Root/contracts/bet';
 
 export default async (currency, address) => {
   const res = await unirest
