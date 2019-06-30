@@ -1,3 +1,2 @@
 export NODE_ENV='development'
 export PRIVATE_KEY='private key';
-export FACTORY_ADDRESS='factory contract address'
