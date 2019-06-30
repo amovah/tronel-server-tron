@@ -16,7 +16,7 @@ async function app() {
     ],
   });
 
-  console.log(res);
+  console.log(tronweb.address.fromHex(res.address));
 }
 
 app();

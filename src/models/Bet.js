@@ -12,7 +12,7 @@ const schema = new Schema({
   },
   joiner: {
     type: String,
-    default: '0x0000000000000000000000000000000000000000',
+    default: 'T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb',
   },
   currency: {
     type: String,

@@ -3,13 +3,11 @@ import express from 'express';
 import { env } from 'process';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
-import Record from './models/Record';
 import Bet from './models/Bet';
 import routes from './routers';
 import { start } from './job';
 import setPrice from './helpers/setPrice';
 import retrieveMoney from './helpers/retrieveMoney';
-// import getNewBets from './helpers/getNewBets';
 
 mongoose.connect('mongodb://localhost/tronel', {
   useNewUrlParser: true,
@@ -28,19 +26,10 @@ mongoose.connection.on('disconnected', () => {
 });
 
 (async () => {
-  const record = await Record.findOne();
-  if (!record) {
-    const newRecord = new Record();
-
-    await newRecord.save();
-  }
-
-  // await getNewBets();
-
   const bets = await Bet.find({
     done: false,
     disabled: false,
-    predictTime: { $gt: Date.now() },
+    predictTime: { $gt: Date.now() / 1000 },
   });
 
   for (const bet of bets) {
