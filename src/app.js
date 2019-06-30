@@ -9,7 +9,7 @@ import routes from './routers';
 import { start } from './job';
 import setPrice from './helpers/setPrice';
 import retrieveMoney from './helpers/retrieveMoney';
-import getNewBets from './helpers/getNewBets';
+// import getNewBets from './helpers/getNewBets';
 
 mongoose.connect('mongodb://localhost/tronel', {
   useNewUrlParser: true,
@@ -35,6 +35,8 @@ mongoose.connection.on('disconnected', () => {
     await newRecord.save();
   }
 
+  // await getNewBets();
+
   const bets = await Bet.find({
     done: false,
     disabled: false,
@@ -50,8 +52,6 @@ mongoose.connection.on('disconnected', () => {
       retrieveMoney(bet.address);
     }, bet.predictTime * 1000 - Date.now() + 60 * 1000);
   }
-
-  await getNewBets();
 
   const app = express();
 
