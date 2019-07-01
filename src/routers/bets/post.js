@@ -36,7 +36,6 @@ router.post('/bets', async (req, res) => {
       throw Error('Invalid Contract');
     }
   } catch (e) {
-    console.log(e);
     res.status(400);
     res.json({
       status: 'error',
