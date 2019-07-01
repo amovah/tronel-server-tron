@@ -33,13 +33,17 @@ mongoose.connection.on('disconnected', () => {
   });
 
   for (const bet of bets) {
-    start(bet.id.toString(), () => {
-      setPrice(bet.currency, bet.address);
-    }, bet.predictTime * 1000 - Date.now());
+    start(
+      `${bet.id}-setPrice`,
+      () => { setPrice(bet.currency, bet.address); },
+      bet.predictTime * 1000 - Date.now(),
+    );
 
-    start(`${bet.id.toString()}-retrieve`, () => {
-      retrieveMoney(bet.address);
-    }, bet.predictTime * 1000 - Date.now() + 60 * 1000);
+    start(
+      `${bet.id}-retrieveMoney`,
+      () => { retrieveMoney(bet.address); },
+      bet.predictTime * 1000 - Date.now() + 60 * 1000,
+    );
   }
 
   const app = express();

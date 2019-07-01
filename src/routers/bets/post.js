@@ -1,6 +1,9 @@
 import { Router } from 'express';
 import tronweb from 'Root/tronweb';
 import Bet from 'Root/models/Bet';
+import setPrice from 'Root/helpers/setPrice';
+import retrieveMoney from 'Root/helpers/retrieveMoney';
+import { start } from 'Root/job';
 
 const router = new Router();
 
@@ -30,6 +33,18 @@ router.post('/bets', async (req, res) => {
     ) {
       const bet = new Bet(data);
       await bet.save();
+
+      start(
+        `${bet.id}-setPrice`,
+        () => { setPrice(bet.currency, bet.address); },
+        bet.predictTime * 1000 - Date.now(),
+      );
+
+      start(
+        `${bet.id}-retrieveMoney`,
+        () => { retrieveMoney(bet.address); },
+        bet.predictTime * 1000 - Date.now() + 60 * 1000,
+      );
 
       res.json(bet);
     } else {
