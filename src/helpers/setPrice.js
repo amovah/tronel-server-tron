@@ -20,7 +20,7 @@ export default async (betId) => {
     const betContract = await tronweb.contract().at(bet.address);
 
     await betContract.setPrice(price).send({
-      feeLimit: 10000,
+      // feeLimit: 10000,
       shouldPollResponse: true,
     });
 

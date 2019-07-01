@@ -13,9 +13,9 @@ router.put('/bets/:id/join', async (req, res) => {
     }
 
     const betContract = await tronweb.contract().at(bet.address);
-    const joiner = await betContract.joiner().call();
+    const joiner = tronweb.address.fromHex(await betContract.joiner().call());
 
-    if (tronweb.address.fromHex(joiner) !== 'T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb') {
+    if (joiner !== 'T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb') {
       bet.joiner = joiner;
       await bet.save();
 
