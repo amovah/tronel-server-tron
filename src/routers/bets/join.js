@@ -17,7 +17,7 @@ router.put('/bets/:id/join', async (req, res) => {
 
     if (tronweb.address.fromHex(joiner) !== 'T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb') {
       bet.joiner = joiner;
-      bet.save();
+      await bet.save();
 
       stop(`${bet.id}-retrieveMoney`);
     }
