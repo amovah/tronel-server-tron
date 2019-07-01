@@ -35,13 +35,13 @@ mongoose.connection.on('disconnected', () => {
   for (const bet of bets) {
     start(
       `${bet.id}-setPrice`,
-      () => { setPrice(bet.currency, bet.address); },
+      () => { setPrice(bet.id); },
       bet.predictTime * 1000 - Date.now(),
     );
 
     start(
       `${bet.id}-retrieveMoney`,
-      () => { retrieveMoney(bet.address); },
+      () => { retrieveMoney(bet.id); },
       bet.predictTime * 1000 - Date.now() + 60 * 1000,
     );
   }
