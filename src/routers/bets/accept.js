@@ -13,10 +13,10 @@ router.put('/bets/:id/join', async (req, res) => {
     }
 
     const betContract = await tronweb.contract().at(bet.address);
-    const joiner = tronweb.address.fromHex(await betContract.joiner().call());
+    const acceptor = tronweb.address.fromHex(await betContract.acceptor().call());
 
-    if (joiner !== 'T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb') {
-      bet.joiner = joiner;
+    if (acceptor !== 'T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb') {
+      bet.acceptor = acceptor;
       await bet.save();
 
       stop(`${bet.id}-retrieveMoney`);

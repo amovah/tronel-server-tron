@@ -1,11 +1,11 @@
 import post from './post';
 import get from './get';
-import join from './join';
+import accept from './accept';
 import disable from './disable';
 
 export default [
   post,
   get,
-  join,
+  accept,
   disable,
 ];

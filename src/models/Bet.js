@@ -10,7 +10,7 @@ const schema = new Schema({
     type: String,
     required: true,
   },
-  joiner: {
+  acceptor: {
     type: String,
     default: 'T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb',
   },
@@ -42,7 +42,7 @@ const schema = new Schema({
     type: Boolean,
     required: true,
   },
-  balance: {
+  betAmount: {
     type: Number,
     required: true,
   },

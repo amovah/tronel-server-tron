@@ -23,7 +23,7 @@ router.post('/bets', async (req, res) => {
       submittedPrice: summary[6].toNumber(),
       disabled: summary[7],
       done: summary[8],
-      balance: summary[9].toNumber(),
+      betAmount: summary[9].toNumber(),
       address: req.body.address,
     };
 
