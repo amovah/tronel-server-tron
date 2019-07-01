@@ -1,4 +1,4 @@
-import tronweb from 'Roo/tronweb';
+import tronweb from 'Root/tronweb';
 import Bet from 'Root/models/Bet';
 
 export default async (betId) => {
