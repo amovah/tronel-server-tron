@@ -6,6 +6,8 @@ const lint = require('gulp-eslint');
 const del = require('del');
 const { resolve } = require('path');
 const replace = require('gulp-replace');
+const uglify = require('gulp-uglify');
+const pipeline = require('readable-stream').pipeline;
 
 gulp.task('del', (cb) => {
   del.sync([
@@ -43,4 +45,22 @@ gulp.task('dev', () => {
   gulp.watch('src/**/*.js', gulp.series('del', 'babel'));
 });
 
-gulp.task('prod', gulp.series('lint', 'del', 'babel'));
+gulp.task('babel-prod', (cb) => {
+  gulp.src('src/**/*.js')
+  .pipe(babel({
+    presets: [
+      "@babel/preset-env",
+    ],
+    plugins: [],
+  }))
+  .pipe(replace('Root', resolve(__dirname, 'build')))
+  .pipe(uglify())
+  .pipe(gulp.dest('build/'));
+
+  gulp.src('src/**/*.json')
+  .pipe(gulp.dest('build/'));
+
+  cb();
+});
+
+gulp.task('prod', gulp.series('lint', 'del', 'babel-prod'));
