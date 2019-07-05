@@ -5,7 +5,7 @@ import tronweb from 'Root/tronweb';
 
 const router = new Router();
 
-router.put('/bets/:id/join', async (req, res) => {
+router.put('/bets/:id/accept', async (req, res) => {
   try {
     const bet = await Bet.findById(req.params.id);
     if (!bet) {
