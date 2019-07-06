@@ -30,7 +30,8 @@ router.post('/bets', async (req, res) => {
 
     if (
       validator[0] === data.currency
-      && validator[1].toNumber() === data.predictPrice + data.predictTime + data.predictType
+      && validator[1].toNumber()
+      === data.predictionPrice + data.predictionTime + data.predictionType
     ) {
       const bet = new Bet(data);
       await bet.save();
@@ -38,13 +39,13 @@ router.post('/bets', async (req, res) => {
       start(
         `${bet.id}-setPrice`,
         () => { setPrice(bet.id); },
-        bet.predictTime * 1000 - Date.now(),
+        bet.predictionTime * 1000 - Date.now(),
       );
 
       start(
         `${bet.id}-retrieveMoney`,
         () => { retrieveMoney(bet.id); },
-        bet.predictTime * 1000 - Date.now() + 60 * 1000,
+        bet.predictionTime * 1000 - Date.now() + 60 * 1000,
       );
 
       res.json(bet);
