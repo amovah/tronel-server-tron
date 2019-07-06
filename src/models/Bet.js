@@ -18,15 +18,15 @@ const schema = new Schema({
     type: String,
     required: true,
   },
-  predictPrice: {
+  predictionPrice: {
     type: Number,
     required: true,
   },
-  predictTime: {
+  predictionTime: {
     type: Number,
     required: true,
   },
-  predictType: {
+  predictionType: {
     type: Number,
     required: true,
   },
@@ -43,6 +43,10 @@ const schema = new Schema({
     required: true,
   },
   betAmount: {
+    type: Number,
+    required: true,
+  },
+  lockTime: {
     type: Number,
     required: true,
   },

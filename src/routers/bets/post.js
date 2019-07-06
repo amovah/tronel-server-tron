@@ -17,18 +17,19 @@ router.post('/bets', async (req, res) => {
     const data = {
       creator: tronweb.address.fromHex(summary[0]),
       currency: summary[2],
-      predictPrice: summary[3].toNumber(),
-      predictTime: summary[4].toNumber(),
-      predictType: summary[5],
+      predictionPrice: summary[3].toNumber(),
+      predictionTime: summary[4].toNumber(),
+      predictionType: summary[5],
       submittedPrice: summary[6].toNumber(),
-      disabled: summary[7],
-      done: summary[8],
-      betAmount: summary[9].toNumber(),
+      betAmount: summary[7].toNumber(),
+      lockTime: summary[8].toNumber(),
+      disabled: summary[9],
+      done: summary[10],
       address: req.body.address,
     };
 
     if (
-      validator[0] === summary[2]
+      validator[0] === data.currency
       && validator[1].toNumber() === data.predictPrice + data.predictTime + data.predictType
     ) {
       const bet = new Bet(data);
