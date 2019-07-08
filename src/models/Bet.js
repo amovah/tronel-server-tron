@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 const schema = new Schema({
-  contractId: {
+  contractIndex: {
     type: Number,
     required: true,
     unique: true,
