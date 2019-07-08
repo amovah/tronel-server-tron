@@ -29,20 +29,20 @@ mongoose.connection.on('disconnected', () => {
   const bets = await Bet.find({
     done: false,
     disabled: false,
-    predictionTime: { $gt: Date.now() / 1000 },
+    specifiedDate: { $gt: Date.now() / 1000 },
   });
 
   for (const bet of bets) {
     start(
       `${bet.id}-setPrice`,
       () => { setPrice(bet.id); },
-      bet.predictionTime * 1000 - Date.now(),
+      bet.specifiedDate * 1000 - Date.now(),
     );
 
     start(
       `${bet.id}-retrieveMoney`,
       () => { retrieveMoney(bet.id); },
-      bet.predictionTime * 1000 - Date.now() + 60 * 1000,
+      bet.specifiedDate * 1000 - Date.now() + 60 * 1000,
     );
   }
 

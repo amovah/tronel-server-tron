@@ -33,13 +33,13 @@ router.post('/bets', async (req, res) => {
       start(
         `${bet.id}-setPrice`,
         () => { setPrice(bet.id); },
-        bet.predictionTime * 1000 - Date.now(),
+        bet.specifiedDate * 1000 - Date.now(),
       );
 
       start(
         `${bet.id}-retrieveMoney`,
         () => { retrieveMoney(bet.id); },
-        bet.predictionTime * 1000 - Date.now() + 60 * 1000,
+        bet.specifiedDate * 1000 - Date.now() + 60 * 1000,
       );
 
       res.json(bet);
