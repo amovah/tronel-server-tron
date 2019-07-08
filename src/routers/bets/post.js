@@ -9,30 +9,24 @@ const router = new Router();
 
 router.post('/bets', async (req, res) => {
   try {
-    const betContract = await tronweb.contract().at(req.body.address);
-
-    const summary = await betContract.getSummary().call();
-    const validator = await betContract.validator().call();
+    const betContract = await tronweb.contract().at(process.env.FACTORY_ADDRESS);
+    const summary = await betContract.getSummary(req.body.contractIndex).call();
 
     const data = {
-      creator: tronweb.address.fromHex(summary[0]),
-      currency: summary[2],
-      predictionPrice: summary[3].toNumber(),
-      predictionTime: summary[4].toNumber(),
-      predictionType: summary[5],
-      submittedPrice: summary[6].toNumber(),
-      betAmount: summary[7].toNumber(),
-      lockTime: summary[8].toNumber(),
-      disabled: summary[9],
-      done: summary[10],
-      address: req.body.address,
+      creator: tronweb.address.fromHex(summary.creator),
+      currency: summary.currency,
+      predictionPrice: summary.predictionPrice.toNumber(),
+      specifiedDate: summary.specifiedDate.toNumber(),
+      lockTime: summary.lockTime.toNumber(),
+      predictionType: summary.predictionType,
+      submittedPrice: summary.submittedPrice.toNumber(),
+      betAmount: summary.betAmount.toNumber(),
+      disabled: summary.disabled,
+      done: summary.done,
+      contractIndex: req.body.contractIndex,
     };
 
-    if (
-      validator[0] === data.currency
-      && validator[1].toNumber()
-      === data.predictionPrice + data.predictionTime + data.predictionType
-    ) {
+    if (data.creator !== 'T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb') {
       const bet = new Bet(data);
       await bet.save();
 

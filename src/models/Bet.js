@@ -1,8 +1,8 @@
 import mongoose, { Schema } from 'mongoose';
 
 const schema = new Schema({
-  address: {
-    type: String,
+  contractId: {
+    type: Number,
     required: true,
     unique: true,
   },
@@ -22,7 +22,7 @@ const schema = new Schema({
     type: Number,
     required: true,
   },
-  predictionTime: {
+  specifiedDate: {
     type: Number,
     required: true,
   },
