@@ -12,8 +12,8 @@ router.put('/bets/:id/disable', async (req, res) => {
       throw new Error('Bet not found!');
     }
 
-    const betContract = await tronweb.contract().at(bet.address);
-    bet.disabled = await betContract.disabled().call();
+    const factory = await tronweb.contract().at(process.env.FACTORY_ADDRESS);
+    bet.disabled = (await factory.bets(bet.contractIndex).call()).disabled;
 
     if (bet.disabled) {
       stop(`${bet.id}-setPrice`);
