@@ -9,8 +9,8 @@ const router = new Router();
 
 router.post('/bets', async (req, res) => {
   try {
-    const betContract = await tronweb.contract().at(process.env.FACTORY_ADDRESS);
-    const summary = await betContract.getSummary(req.body.contractIndex).call();
+    const factory = await tronweb.contract().at(process.env.FACTORY_ADDRESS);
+    const summary = await factory.getSummary(req.body.contractIndex).call();
 
     const data = {
       creator: tronweb.address.fromHex(summary.creator),

@@ -12,8 +12,9 @@ router.put('/bets/:id/accept', async (req, res) => {
       throw new Error('Bet not found!');
     }
 
-    const betContract = await tronweb.contract().at(bet.address);
-    const acceptor = tronweb.address.fromHex(await betContract.acceptor().call());
+    const factory = await tronweb.contract().at(process.env.FACTORY_ADDRESS);
+    const betObject = await factory.bets(bet.contractIndex).call();
+    const acceptor = tronweb.address.fromHex(betObject.acceptor);
 
     if (acceptor !== 'T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb') {
       bet.acceptor = acceptor;
