@@ -17,14 +17,16 @@ export default async (betId) => {
     }
 
     const price = Math.floor(parseInt(res.body[0].price_usd, 10));
-    const betContract = await tronweb.contract().at(bet.address);
+    const factory = await tronweb.contract().at(process.env.FACTORY_ADDRESS);
 
-    await betContract.setPrice(price).send({
+    await factory.setPrice(bet.contractIndex, price).send({
       shouldPollResponse: true,
     });
 
-    bet.done = await betContract.done().call();
-    bet.submittedPrice = await betContract.submittedPrice().call();
+    const betInst = await factory.bets(bet.contractIndex).call();
+
+    bet.done = betInst.done;
+    bet.submittedPrice = betInst.submittedPrice;
 
     await bet.save();
   } catch (e) {

@@ -5,12 +5,12 @@ export default async (betId) => {
   try {
     const bet = await Bet.findById(betId);
 
-    const betContract = await tronweb.contract().at(bet.address);
-    await betContract.retrieveMoney().send({
+    const factory = await tronweb.contract().at(process.env.FACTORY_ADDRESS);
+    await factory.retrieveMoney(bet.contractIndex).send({
       shouldPollResponse: true,
     });
 
-    bet.done = await betContract.done().call();
+    bet.done = (await factory.bets(bet.contractIndex).call()).done;
     await bet.save();
   } catch (e) {
     console.error(
