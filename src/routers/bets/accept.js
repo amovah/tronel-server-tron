@@ -20,7 +20,7 @@ router.put('/bets/:id/accept', async (req, res) => {
       bet.acceptor = acceptor;
       await bet.save();
 
-      stop(`${bet.id}-retrieveMoney`);
+      stop(`${bet.id}-lockBet`);
     }
 
     res.json(bet);

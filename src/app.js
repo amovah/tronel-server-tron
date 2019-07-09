@@ -7,7 +7,7 @@ import Bet from './models/Bet';
 import routes from './routers';
 import { start } from './job';
 import setPrice from './helpers/setPrice';
-import retrieveMoney from './helpers/retrieveMoney';
+import lockBet from './helpers/lockBet';
 
 mongoose.connect('mongodb://localhost/tronel', {
   useNewUrlParser: true,
@@ -40,9 +40,9 @@ mongoose.connection.on('disconnected', () => {
     );
 
     start(
-      `${bet.id}-retrieveMoney`,
-      () => { retrieveMoney(bet.id); },
-      bet.specifiedDate * 1000 - Date.now() + 60 * 1000,
+      `${bet.id}-lockBet`,
+      () => { lockBet(bet.id); },
+      bet.lockTime * 1000 - Date.now() + 10000,
     );
   }
 

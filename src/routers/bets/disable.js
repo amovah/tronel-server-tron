@@ -17,7 +17,7 @@ router.put('/bets/:id/disable', async (req, res) => {
 
     if (bet.disabled) {
       stop(`${bet.id}-setPrice`);
-      stop(`${bet.id}-retrieveMoney`);
+      stop(`${bet.id}-lockBet`);
 
       await bet.save();
     }
