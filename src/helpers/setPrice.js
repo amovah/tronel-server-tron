@@ -19,7 +19,7 @@ export default async (betId) => {
     const price = Math.floor(parseInt(res.body[0].price_usd, 10));
     const factory = await tronweb.contract().at(process.env.FACTORY_ADDRESS);
 
-    await factory.setPrice(bet.contractIndex, price).send({
+    await factory.setPrice(bet.contractIndex, price * 10000).send({
       shouldPollResponse: true,
     });
 
