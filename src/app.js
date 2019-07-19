@@ -9,7 +9,7 @@ import { start } from './job';
 import setPrice from './helpers/setPrice';
 import lockBet from './helpers/lockBet';
 
-mongoose.connect('mongodb://localhost/tronel', {
+mongoose.connect(`mongodb://localhost/${process.env.DATABASE}`, {
   useNewUrlParser: true,
   useCreateIndex: true,
 });
