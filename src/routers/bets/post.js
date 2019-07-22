@@ -47,6 +47,8 @@ router.post('/bets', async (req, res) => {
       throw Error('Invalid Contract');
     }
   } catch (e) {
+    console.error('adding contract failed', e);
+
     res.status(400);
     res.json({
       status: 'error',
