@@ -36,7 +36,7 @@ mongoose.connection.on('disconnected', () => {
     start(
       `${bet.id}-setPrice`,
       () => { setPrice(bet.id); },
-      bet.specifiedDate * 1000 - Date.now(),
+      bet.specifiedDate * 1000 - Date.now() + 20000,
     );
 
     start(
