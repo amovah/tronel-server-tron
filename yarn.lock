@@ -4820,10 +4820,10 @@ trim-right@^1.0.1:
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
   integrity sha1-yy4SAwZ+DI3h9hQJS5/kVwTqYAM=
 
-tronweb@^2.6.4:
-  version "2.6.4"
-  resolved "https://registry.yarnpkg.com/tronweb/-/tronweb-2.6.4.tgz#f7bc3b8e6fefead2dbaee1c68544a508578b3ebc"
-  integrity sha512-aK3P20FQUFvWnVx7BMA/NrulNIJS14k1u9Pux+DpyOhD8+u4egAVRR5m8tR7exfR5r2p7O4Db4CbkDmWVfVgig==
+tronweb@^2.6.6:
+  version "2.6.6"
+  resolved "https://registry.yarnpkg.com/tronweb/-/tronweb-2.6.6.tgz#f7b693919b3a1a2e1f13bd2ec4e7c4e391088ef5"
+  integrity sha512-rZE2nj0kvmxa5J67Yc6kykZ8ypTUPBs0ffO4s6DFEVflKZrcdEW61V7Q/xU5HW0SD4VVNyQ7HuoOn/JqdYOhjQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     axios "^0.19.0"
